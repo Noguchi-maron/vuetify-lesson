@@ -10,8 +10,11 @@
     </header>
       
     <v-navigation-drawer absolute v-model="drawer" temporary>
-      <v-container pa-0>
-      <v-btn block text x-large v-for="btn in menuBtns" :key="btn" @click="currentView=btn">{{ btn }}</v-btn>
+      <v-container :class="{ 'xs-style': xsStyle }" class="pa-0">
+        <v-list-item-group>
+          <v-list-item block text x-large v-for="list in menuLists" :key="list" @click="currentView=list" class="pl-10">{{ list }}</v-list-item>
+
+        </v-list-item-group>
       </v-container>
     </v-navigation-drawer>
     <v-main>
@@ -24,29 +27,32 @@
 import Login from './components/Login.vue'
 import SignUpPage from './components/SignUpPage.vue'
 import Home from './components/Home.vue'
+import Photo from './components/Photo.vue'
 
 export default {
   name: 'App',
   components: {
     Login,
     SignUpPage,
-    Home
+    Home,
+    Photo
   },
   data: () => ({
     drawer: null,
-    toolBtns: ['Login', 'MyPage'],
-    menuBtns: ['Home', 'New Trip', 'Schedule', 'Photo', 'Login'],
-    currentView: 'Login',
+    menuLists: ['Home', 'Photo', 'Login'],
+    currentView: 'Home',
     users: [],
-    photoUrl: [
-      //新幹線
-      'https://1.bp.blogspot.com/-CZhDpH9AENw/WTd5T6ADZtI/AAAAAAABEuw/epxCOLW9e0QvxnGxHjquTneZkhotr294gCLcB/s400/travel_bus_train_student.png',
-      //富士山
-      'https://3.bp.blogspot.com/-WiNPt0_l3lc/U0pTNIhcmUI/AAAAAAAAfF4/BW1m-kFqMzI/s400/fujisan_shikaku.png',
-      //夕日
-      'https://3.bp.blogspot.com/-WiNPt0_l3lc/U0pTNIhcmUI/AAAAAAAAfF4/BW1m-kFqMzI/s400/fujisan_shikaku.png'
-    ]
+    
   }),
+  computed: {
+    xsStyle () {
+        if (this.$vuetify.breakpoint.xs) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   methods: {
     signUp () {
       this.currentView='SignUpPage'
@@ -58,3 +64,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  .xs-style {
+    margin-top: 60px;
+  }
+</style>

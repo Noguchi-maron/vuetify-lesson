@@ -1,8 +1,8 @@
 <template>
   <v-app>
   <v-row justify="center" align="center">
-    <v-col cols="6">
-      <v-card class="px-10 py-15">
+    <v-col cols="12" sm="6" md="4">
+      <v-card class="px-10 py-15 mx-5">
         <p>新規登録</p>
         <v-text-field v-model="lastName" label="氏" clearable></v-text-field>
         <v-text-field v-model="firstName" label="名" clearable></v-text-field>
